@@ -1,0 +1,6 @@
+project(record_combine)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
+add_executable(record_combine record_combine.cpp)
+add_executable(popnet_trace_transfer popnet_trace_transfer.cpp)
+add_executable(random_phy_records random_phy_records.cpp)

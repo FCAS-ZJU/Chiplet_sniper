@@ -1,0 +1,5 @@
+project(delay_analyze)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
+add_executable(delay_analyze delay_analyze.cpp)
+add_executable(popnet_delay_info_transfer popnet_delay_info_transfer.cpp)
