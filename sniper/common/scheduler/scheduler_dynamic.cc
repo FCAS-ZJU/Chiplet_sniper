@@ -12,6 +12,7 @@ SchedulerDynamic::SchedulerDynamic(ThreadManager *thread_manager)
    Sim()->getHooksManager()->registerHook(HookType::HOOK_THREAD_START, hook_thread_start, (UInt64)this, HooksManager::ORDER_ACTION);
    //commented at 2020-4-14
    //注册线程挂起的钩子函数（调度器）
+   //register the hook function of the thread's stalling (scheduler)
    Sim()->getHooksManager()->registerHook(HookType::HOOK_THREAD_STALL, hook_thread_stall, (UInt64)this, HooksManager::ORDER_ACTION);
    Sim()->getHooksManager()->registerHook(HookType::HOOK_THREAD_RESUME, hook_thread_resume, (UInt64)this, HooksManager::ORDER_ACTION);
    Sim()->getHooksManager()->registerHook(HookType::HOOK_THREAD_EXIT, hook_thread_exit, (UInt64)this, HooksManager::ORDER_ACTION);
@@ -41,6 +42,7 @@ void SchedulerDynamic::__threadStart(thread_id_t thread_id, SubsecondTime time)
 
 //commented at 2020-4-14
 //系统调用时挂起线程调用的钩子函数（调度器）
+//hook function called when the thread stalls during syscall (scheduler)
 void SchedulerDynamic::__threadStall(thread_id_t thread_id, ThreadManager::stall_type_t reason, SubsecondTime time)
 {
    if (reason != ThreadManager::STALL_UNSCHEDULED)
@@ -53,6 +55,7 @@ void SchedulerDynamic::__threadStall(thread_id_t thread_id, ThreadManager::stall
 
 //commented at 2020-4-14
 //线程重新开始
+//thread restarts
 void SchedulerDynamic::__threadResume(thread_id_t thread_id, thread_id_t thread_by, SubsecondTime time)
 {
    m_threads_runnable[thread_id] = true;

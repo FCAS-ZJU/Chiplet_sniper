@@ -95,12 +95,14 @@ sim_router_template::sim_router_template(long a, long b, long c,
 
 	//changed at 2020-5-6
 	//添加了芯粒的路由算法
+	//add chiplet routing algorithm about mesh
 	case CHIPLET_ROUTING:
 		curr_algorithm = &sim_router_template::chiplet_routing_alg;
 		break;
 
 	//changed at 2020-5-19
 	//增加了星型拓扑的芯粒路由算法
+	//add chiplet routing algorithm about star topology
 	case CHIPLET_STAR_TOPO_ROUTING:
 		curr_algorithm = &sim_router_template::chiplet_star_topo_routing_alg;
 		break;
@@ -445,6 +447,8 @@ void sim_router_template::inject_packet(long a, add_type &b, add_type &c,
 	//有问题……
 	//if(e<2)e=2;
 	//修正：用SINGLE，既代表头又代表尾
+	//a bug about one-flit-long message
+	//fix: use the flit type SINGLE, which stands for both head and tail
 	/* if(e==1){
 		Data_type flitData;
 		long i;
@@ -457,6 +461,7 @@ void sim_router_template::inject_packet(long a, add_type &b, add_type &c,
 	} */
 	//changed at 2020-5-12
 	//检查是否有不符合要求的输入
+	//check any incorrect input words
 	const char WRONG_ADDRESS[] = "Coordinate out of range";
 	/* for(auto&x:b){
 		if(x>=ary_size_){
@@ -725,6 +730,7 @@ void sim_router_template::flit_outbuffer()
 					//cre_pc_t=getWirePc(i);
 					//commented at 2020-5-22
 					//发送CREDIT事件，让原来的输出缓存空位数加一
+					//send CREDIT events and clean a position of the output buffer
 					mess_queue::wm_pointer().add_message(
 						mess_event(event_time + CREDIT_DELAY_,
 								   CREDIT_, address_, cre_add_t, cre_pc_t, j));
@@ -899,6 +905,8 @@ long sim_router_template::getWirePc(long port)
 //commented at 2020-5-7
 //将在输出缓存的微片（flit）传给下一跳的路由器
 //这里有物理（输出）端口与相邻路由器的对应关系
+//give the next router a flit in output buffer
+//the function gives relation between VC and neighboors
 //***************************************************************************//
 //flit traversal through the link stage
 void sim_router_template::flit_traversal(long i)
@@ -936,6 +944,7 @@ void sim_router_template::flit_traversal(long i)
 														outadd_t.second, flit_t));
 		//changed at 2020-5-8
 		//输出下一跳路由
+		//output the next router
 		/* cout << "Router ";
 		for (auto &x : address_)
 			cout << x << ' ';
@@ -963,6 +972,7 @@ void sim_router_template::accept_flit(time_type a, const flit_template &b)
 		time_type t = a - b.start_time();
 		delay_update(t);
 		//发送时间（周期），源地址，目的地址，延迟（周期）
+		//sent time (by cycle), source address, destination address, delay (cycle)
 		ofs << b.start_time() << ' '
 			/* <<a<<' ' */;
 		for (auto &x : b.sor_addr())

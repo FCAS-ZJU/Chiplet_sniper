@@ -36,9 +36,11 @@ typedef struct {
 
    //changed at 2020-4-19
    //注册函数，以传递跨芯粒数据
+   //registering function to pass inter-chiplet data
    //AFUNPTR funcReg;
    //AFUNPTR readFunc,writeFunc;
    //全部移到regFunc
+   //it was moved to regFunc
 } __attribute__((packed,aligned(LINE_SIZE_BYTES))) thread_data_t;
 
 extern thread_data_t *thread_data;

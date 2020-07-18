@@ -76,6 +76,7 @@ SyscallMdl::~SyscallMdl()
 //commented at 2020-3-23
 //系统调用？
 //是系统调用，但是增加的系统调用号没到这里就返回错误了。应该有某种保护机制。
+//syscall, in front of which there are protecting codes, because errors will happen before the codes there run
 bool SyscallMdl::runEnter(IntPtr syscall_number, syscall_args_t &args)
 {
    Core *core = m_thread->getCore();
@@ -101,6 +102,7 @@ bool SyscallMdl::runEnter(IntPtr syscall_number, syscall_args_t &args)
 
    //changed at 2020-3-27
    //测试是否系统调用
+   //test whether it is syscall function
    //std::cout<<"Syscall here. Syscall number is "<<syscall_number<<std::endl;
    //getchar();
    switch (syscall_number)
@@ -312,18 +314,22 @@ bool SyscallMdl::runEnter(IntPtr syscall_number, syscall_args_t &args)
 
    //changed at 2020-3-27
    //插入跨芯粒读写的系统调用号
+   //syscall numbers on inter-chiplet operations
    case nsChange::SYSCALL_TEST_CHANGE:
       //测试
+      //testing
       std::cout << "Test succeeds(core)\n";
       break;
 
    case nsChange::SYSCALL_REMOTE_READ:
    {
       //TODO: 跨芯粒读
+      //read from other chiplet
       ScopedLock sl(Sim()->getThreadManager()->getLock());
       auto cur_time = m_thread->getCore()->getPerformanceModel()->getElapsedTime();
       des_addr_map_t::iterator it = des_addr_map.find(args.arg0);
       //recv 本地端口 远程地址 远程端口 本地核心 时间（纳秒）
+      //recv (local port) (remote address) (remote port) (local core) (time by nanosecond)
       if (it != des_addr_map.end())
       {
          msg_record << "recv "
@@ -426,6 +432,7 @@ bool SyscallMdl::runEnter(IntPtr syscall_number, syscall_args_t &args)
 
 //commented at 2020-4-14
 //离开系统调用态，线程就绪
+//leave syscall state and the thread gets ready
 IntPtr SyscallMdl::runExit(IntPtr old_return)
 {
    //changed at 2020-4-15

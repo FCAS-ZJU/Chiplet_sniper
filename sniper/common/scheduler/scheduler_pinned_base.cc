@@ -180,6 +180,7 @@ void SchedulerPinnedBase::threadStart(thread_id_t thread_id, SubsecondTime time)
 //commented at 2020-4-14
 //不是这个调度器，但是是这个函数？
 //是的
+//don't care this comment
 void SchedulerPinnedBase::threadStall(thread_id_t thread_id, ThreadManager::stall_type_t reason, SubsecondTime time)
 {
    //检查是否使用了这个函数

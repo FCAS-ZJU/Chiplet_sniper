@@ -5,6 +5,7 @@
 
 //commented at 2020-4-14
 //所用的调度器
+//schedulers used
 class SchedulerPinned : public SchedulerPinnedBase
 {
    public:

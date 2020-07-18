@@ -1,6 +1,7 @@
 #include "globals.h"
 
 //changed at 2020-1-7 by zhc
+//因为有错误
 //because of an error
 //KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "trace", "output");
 KNOB<std::string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "trace", "output");

@@ -257,6 +257,7 @@ void FrontendSyscallModel<PinFrontend>::syscallEntryCallback
   //changed at 2020-4-19
   //std::cout<<"add syscall numbers\n";
   //不是这里
+  //not here
    PIN_SetSyscallNumber(ctxt, syscall_standard, SYS_getpid);
    PIN_SetSyscallNumber(ctxt, syscall_standard, nsChange::SYSCALL_TEST_CHANGE);
    PIN_SetSyscallNumber(ctxt, syscall_standard, nsChange::SYSCALL_REMOTE_READ);

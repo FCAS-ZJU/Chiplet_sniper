@@ -33,6 +33,7 @@ string mess_queue:: mess_error_ =
 
 //commented at 2020-3
 //主循环，不断循环处理消息
+//main loop, which keeps processing messages
 void mess_queue::simulator() {
 	//changed at 2020-5-23
 	//static uint64_t wireMsgCnt=0,creditMsgCnt=0;
@@ -45,6 +46,7 @@ void mess_queue::simulator() {
 		mess_event current_message = * get_message();
 		//changed at 2020-5-23
 		//输出日志
+		//output log
 		logfile<<current_message;
 		if(current_message.event_type()==WIRE_||current_message.event_type()==CREDIT_){
 			logfile<<"\tFrom Router "<<current_message.src()

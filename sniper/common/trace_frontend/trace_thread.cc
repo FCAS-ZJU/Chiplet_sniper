@@ -224,6 +224,8 @@ void TraceThread::handleOutputFunc(uint8_t fd, const uint8_t *data, uint32_t siz
 //扩展，并解除屏蔽
 //是系统调用，但是增加的系统调用号没到这里就返回错误了。应该有某种保护机制。
 //新增的系统调用号可以传进来了
+//syscall function after protection
+//new syscall numbers can be used here now
 uint64_t TraceThread::handleSyscallFunc(uint16_t syscall_number, const uint8_t *data, uint32_t size)
 {
    // We may have been blocked in a system call, if we start executing instructions again that means we're continuing
@@ -236,6 +238,7 @@ uint64_t TraceThread::handleSyscallFunc(uint16_t syscall_number, const uint8_t *
    uint64_t ret = 0;
 
    //changed at 2020-3-27
+   //test whether it is a syscall function
    //测试是否系统调用
    //std::cout<<"Syscall here. Syscall number is "<<syscall_number<<std::endl;
    switch(syscall_number)
@@ -757,6 +760,7 @@ void TraceThread::addDetailedMemoryInfo(DynamicInstruction *dynins, Sift::Instru
 
 //commented at 2020-4-15
 //退出系统调用态
+//exit syscall state
 void TraceThread::unblock()
 {
    LOG_ASSERT_ERROR(m_blocked == true, "Must call only when m_blocked == true");
@@ -789,6 +793,7 @@ void TraceThread::unblock()
 
 //changed at 2020-4-19
 //输出堆栈
+//output stack
 void outputStack()
 {
    const size_t SIZE=100;
@@ -837,6 +842,7 @@ void TraceThread::run()
    /* std::cout<<"main loop\n";
    getchar(); */
    //成功，的确是主循环
+   //main loop
    while(have_first && m_trace.Read(next_inst))
    {
       if (m_blocked)

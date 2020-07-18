@@ -12,6 +12,7 @@
 
 //什么都没有，只能用文件了
 //套接字也行？
+//I use socket to communicate
 #include <unordered_map>
 #include <sys/msg.h>
 #include <cstdio>
@@ -323,6 +324,7 @@ bool handleAccessMemory(void *arg, Sift::MemoryLockType lock_signal, Sift::Memor
 
 //commented at 2020-4-2
 //真正的系统调用处理函数
+//real syscall processing function, which processes all syscalls
 // Emulate all system calls
 // Do this as a regular callback (versus syscall enter/exit functions) as those hold the global pin lock
 VOID emulateSyscallFunc(THREADID threadid, CONTEXT *ctxt)
@@ -441,6 +443,7 @@ VOID emulateSyscallFunc(THREADID threadid, CONTEXT *ctxt)
 
       //changed at 2020-4-2
       //插入跨芯粒读写的系统调用号
+      //syscall number on inter-chiplet operation
       case nsChange::SYSCALL_TEST_CHANGE:
       {
          //测试
@@ -601,6 +604,7 @@ static VOID syscallEntryCallback(THREADID threadid, CONTEXT *ctxt, SYSCALL_STAND
    //changed at 2020-4-19
    //std::cout<<"add syscall numbers\n";
    //是这里
+   //it is here
    PIN_SetSyscallNumber(ctxt, syscall_standard, SYS_getpid);
    /* PIN_SetSyscallNumber(ctxt, syscall_standard, nsChange::SYSCALL_TEST_CHANGE);
    PIN_SetSyscallNumber(ctxt, syscall_standard, nsChange::SYSCALL_REMOTE_READ);

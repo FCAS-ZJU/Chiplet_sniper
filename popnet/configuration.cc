@@ -14,6 +14,8 @@
 //changed at 2020-5-8
 //为了便于调试改成一百万
 //实际使用时要改回0
+//in order to test easily, it is set as a million
+//it should be set as 0 when it is used actually
 //const time_type TIME_0=1000000;
 const time_type TIME_0=0;
 

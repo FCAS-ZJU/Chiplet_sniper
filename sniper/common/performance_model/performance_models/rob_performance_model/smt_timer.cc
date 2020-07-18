@@ -32,6 +32,7 @@ SmtTimer::SmtTimer(uint64_t num_threads)
    Sim()->getHooksManager()->registerHook(HookType::HOOK_THREAD_EXIT, SmtTimer::hookThreadExit, (UInt64)this);
    //commented at 2020-4-13
    //注册系统调用的钩子函数
+   //register the hook function of the syscall
    Sim()->getHooksManager()->registerHook(HookType::HOOK_THREAD_STALL, SmtTimer::hookThreadStall, (UInt64)this);
    Sim()->getHooksManager()->registerHook(HookType::HOOK_THREAD_RESUME, SmtTimer::hookThreadResume, (UInt64)this);
    Sim()->getHooksManager()->registerHook(HookType::HOOK_THREAD_MIGRATE, SmtTimer::hookThreadMigrate, (UInt64)this);
@@ -272,6 +273,8 @@ void SmtTimer::threadExit(HooksManager::ThreadTime *argument)
 //commented at 2020-4-13
 //系统调用的钩子函数
 //系统调用时，进程挂起时调用的函数
+//hook function of syscall
+//when a syscall is running, the function will be called while the thread is stalled
 void SmtTimer::threadStall(HooksManager::ThreadStall *argument)
 {
    ScopedLock sl(m_lock);

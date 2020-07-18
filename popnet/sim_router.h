@@ -334,6 +334,7 @@ class sim_router_template {
 
 		//changed at 2020-5-6
 		//新路由算法
+		//new routing algorithm
 		void chiplet_routing_alg(const add_type & des_t,const add_type & sor_t, long s_ph, long s_vc);
 		//changed at 2020-5-19
 		void chiplet_star_topo_routing_alg(const add_type & des_t,const add_type & src_t, long s_ph, long s_vc);

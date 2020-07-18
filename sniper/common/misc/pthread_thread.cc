@@ -31,6 +31,7 @@ void PthreadThread::run()
 
 //commented at 2020-4-19
 //多线程调用主循环
+//some threads run the main loop
 // Check if pin_thread.cc is included in the build and has
 // Thread::Create defined. If so, PthreadThread is not used.
 __attribute__((weak)) _Thread* _Thread::create(ThreadFunc func, void *param)

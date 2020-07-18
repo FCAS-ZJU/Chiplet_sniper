@@ -314,6 +314,7 @@ bool Sift::Reader::Read(Instruction &inst)
             //commented at 2020-3-27
             //系统调用？
             //是，但仍有保护机制在前面
+            //syscall function after protection
             case RecOtherSyscallRequest:
             {
                //changed at 2020-4-1
@@ -349,6 +350,7 @@ bool Sift::Reader::Read(Instruction &inst)
                   #endif
                   //changed at 2020-3-27
                   //测试是否系统调用
+                  //test whether it is a syscall function
                   //std::cout<<"Syscall: "<<syscall_number<<std::endl;
                   uint64_t ret = handleSyscallFunc(handleSyscallArg, syscall_number, bytes, size);
                   sendSyscallResponse(ret);

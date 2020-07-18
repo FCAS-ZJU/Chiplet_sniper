@@ -42,6 +42,7 @@ void HooksManager::registerHook(HookType::hook_type_t type, HookCallbackFunc fun
 
 //commented at 2020-4-7
 //挂起线程时写入一些设置？
+//don't care this comment
 SInt64 HooksManager::callHooks(HookType::hook_type_t type, UInt64 arg, bool expect_return)
 {
    for(unsigned int order = 0; order < NUM_HOOK_ORDER; ++order)

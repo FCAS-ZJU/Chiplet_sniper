@@ -118,6 +118,7 @@ AFUNPTR FindAddressOfRtn(IMG img, const char*rtnName)
     return (AFUNPTR)RTN_Address(r);
 }
 //修改这个函数来获得读写任务程序内存的函数指针
+//change this function to get a pointer to the function which read or write memory of benchmark
 void getFuncAddr(IMG image,VOID*v)
 {
    if(IMG_IsMainExecutable(image)){
@@ -131,6 +132,7 @@ void getFuncAddr(IMG image,VOID*v)
    }
 }
 //函数头，不写头文件了
+//Forgive me. I just don't want to create a new head file.
 int openZmqProcess();
 int closeZmqProcess();
 
@@ -220,6 +222,7 @@ int main(int argc, char **argv)
       //changed at 2020-4-19
       //std::cout<<"init syscall model\n";
       //经过这里
+      //pass through here
       initSyscallModeling();
    }
 

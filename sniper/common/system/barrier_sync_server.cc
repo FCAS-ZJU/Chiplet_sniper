@@ -44,6 +44,7 @@ BarrierSyncServer::BarrierSyncServer()
    //commented at 2020-4-14
    //系统调用返回？
    //不是
+   //not returning from syscall
    Sim()->getHooksManager()->registerHook(HookType::HOOK_THREAD_STALL, BarrierSyncServer::hookThreadStall, (UInt64)this, HooksManager::ORDER_NOTIFY_POST);
    Sim()->getHooksManager()->registerHook(HookType::HOOK_THREAD_MIGRATE, BarrierSyncServer::hookThreadMigrate, (UInt64)this, HooksManager::ORDER_NOTIFY_POST);
 

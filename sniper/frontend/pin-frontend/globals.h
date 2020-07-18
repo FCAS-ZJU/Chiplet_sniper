@@ -19,6 +19,7 @@
 //#define MAX_NUM_THREADS 128
 
 //changed at 2020-1-7 by zhc
+//因为有错误
 //because of an error
 //extern KNOB<string> KnobOutputFile;
 extern KNOB<std::string> KnobOutputFile;

@@ -690,6 +690,7 @@ void IntervalTimer::blockWindow()
 
 //commented at 2020-3-27
 //执行时间，取决于所依赖指令的执行时间
+//executing time, up to the instructions it depends
 // Allow the use of negative times for comparisons
 uint64_t IntervalTimer::getMaxProducerExecTime(Windows::WindowEntry& micro_op) {
    int64_t oldestStartTime = m_windows->getOldestInstruction().getExecTime() - m_windows->getOldestInstruction().getDynMicroOp()->getExecLatency();

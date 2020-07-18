@@ -54,6 +54,7 @@ void SchedulerBigSmall::threadSetInitialAffinity(thread_id_t thread_id)
 
 //commented at 2020-4-14
 //不是这个调度器
+//no this scheduler
 void SchedulerBigSmall::threadStall(thread_id_t thread_id, ThreadManager::stall_type_t reason, SubsecondTime time)
 {
    // When a thread on the big core stalls, promote another thread to the big core(s)

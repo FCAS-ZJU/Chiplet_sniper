@@ -16,6 +16,8 @@ extern "C" {
 //缩写说明：
 //pc：路由器的端口
 //vc：虚通道
+//pc stands for physical channel
+//vc stands for virtual channel
 int main(int argc, char *argv[])
 {
 	try {

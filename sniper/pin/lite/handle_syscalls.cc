@@ -81,6 +81,7 @@ void syscallEnterRunModel(THREADID threadIndex, CONTEXT* ctx, SYSCALL_STANDARD s
 
 //commented at 2020-4-15
 //不是这里
+//not here
 void syscallExitRunModel(THREADID threadIndex, CONTEXT* ctx, SYSCALL_STANDARD syscall_standard, void* v)
 {
    //chenged at 2020-4-15

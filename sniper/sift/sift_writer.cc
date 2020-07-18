@@ -490,6 +490,7 @@ static T force_read(volatile T *addr)
 
 //commented at 2020-4-2
 //是这里输出
+//output syscall information
 uint64_t Sift::Writer::Syscall(uint16_t syscall_number, const char *data, uint32_t size)
 {
    #if VERBOSE > 0

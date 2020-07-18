@@ -94,11 +94,17 @@ void sim_router_template::XY_algorithm(const add_type & des_t,
 
 //changed at 2020-5-6
 //芯粒路由算法
+//chiplet routing algorithm
 void sim_router_template::chiplet_routing_alg(const add_type & des_t,const add_type & src_t, long s_ph, long s_vc)
 {
 	//地址格式：芯粒横坐标，芯粒纵坐标，核心横坐标，核心纵坐标
 	//芯粒间和芯粒内使用XY路由。
 	//芯粒内(0,0)核心为网关。
+	/*
+	address format: chiplet x, chiplet y, core x, core y
+	X-Y routing algorithm is used between chiplets and between cores
+	the Router (0, 0) is the gateway in a chiplet
+	*/
 	const long VIRTUAL_CHANNEL_COUNT=2;
 	add_type delta;
 	size_t addr_len=des_t.size();
@@ -142,12 +148,14 @@ void addRoutingForDifferentVC(input_template&inputModule,long s_ph,long s_vc,lon
 bool checkAddressIndex(const add_type&d,long idx,long&port)
 {
 	//根据本地地址与目的地址的差计算出端口号
+	//calculate VC number according to the differeces between local address and destination address
 	if(d[idx]==0)return true;
 	port=(idx<<1)+(d[idx]>0?2:1);
 	return false;
 }
 //changed at 2020-5-19
 //增加了星型拓扑的芯粒路由算法
+//add chiplet routing algorithm on star topology
 void sim_router_template::chiplet_star_topo_routing_alg(
 	const add_type&des_t,
 	const add_type&src_t,
@@ -240,6 +248,7 @@ void sim_router_template::routing_decision()
 				if(address_ == des_t) {
 					//changed at 2020-5-23
 					//发送CREDIT事件，让原来的输出缓存空位数加一
+					//send CREDIT event to clean a position of output buffer
 					add_type cre_add_t/*  = address_ */;
 					long cre_pc_t/*  = i */;
 					/* if((i % 2) == 0) {

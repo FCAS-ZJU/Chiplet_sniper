@@ -35,6 +35,7 @@ sim_foundation::sim_foundation():
 	long phy_ports_t = cube_size_ * 2 + 1;
 	//changed at 2020-5-20
 	//权宜之计，这样做会增大不必要的内存消耗
+	//temporary way, which will add unnesessary memory usage
 	if(configuration::ap().routing_alg()==CHIPLET_STAR_TOPO_ROUTING)
 		phy_ports_t=max(phy_ports_t,cube_size_*cube_size_)+1;
 	router_counter_ = ary_size_;

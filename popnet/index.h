@@ -10,6 +10,7 @@ using namespace std;
 enum mess_type {EVG_, ROUTER_, WIRE_, CREDIT_};
 //changed at 2020-5-6
 //添加了芯粒的路由算法枚举
+//add enums about chiplet routing algorithms
 enum routing_type {
     XY_ ,
     TXY_ ,

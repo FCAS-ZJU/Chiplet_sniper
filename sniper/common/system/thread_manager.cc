@@ -338,6 +338,7 @@ void ThreadManager::wakeUpWaiter(thread_id_t thread_id, SubsecondTime time)
 
 //commented at 2020-4-7
 //挂起线程
+//thread stalls
 void ThreadManager::stallThread_async(thread_id_t thread_id, stall_type_t reason, SubsecondTime time)
 {
    //changed at 2020-4-19
@@ -371,6 +372,7 @@ SubsecondTime ThreadManager::stallThread(thread_id_t thread_id, stall_type_t rea
 
 //commented at 2020-4-15
 //唤醒线程
+//wake up the thread
 void ThreadManager::resumeThread_async(thread_id_t thread_id, thread_id_t thread_by, SubsecondTime time, void *msg)
 {
    LOG_PRINT("Core(%i) -> RUNNING", thread_id);
