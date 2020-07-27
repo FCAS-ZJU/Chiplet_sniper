@@ -1,5 +1,7 @@
 # intersim
 
+readme.en.md is English version.
+
 #### 介绍
 intersim是一款芯粒模拟器，可以将多个sniper实例连接起来，相互通信。具体请见说明文件。
 
